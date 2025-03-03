@@ -12,7 +12,6 @@ import datetime
 def create_table():
     conn = sqlite3.connect('finance.db')
     c = conn.cursor()
-    # Eğer transactions tablosu yoksa oluşturuyoruz
     c.execute('''CREATE TABLE IF NOT EXISTS transactions (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     type TEXT,
@@ -25,7 +24,7 @@ def create_table():
 def add_transaction(transaction_type, amount, description):
     conn = sqlite3.connect('finance.db')
     c = conn.cursor()
-    # İşlemin eklendiği zamanı alıyoruz
+
     date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     c.execute("INSERT INTO transactions (type, amount, description, date) VALUES (?, ?, ?, ?)",
               (transaction_type, amount, description, date))
